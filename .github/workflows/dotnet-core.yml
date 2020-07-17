@@ -5,10 +5,12 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+env:
+  folderName: 'TestSite'
 jobs:
   build:
-
+    env: 
+      csprojName:  'TestSite.csproj'
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +20,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore $folderName/$csprojName
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
