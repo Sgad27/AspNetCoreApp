@@ -3,8 +3,13 @@ name: .NET Core
 on:
   push:
     branches: [ master ]
+    paths: 
+    - 'TestSite/**'
   pull_request:
     branches: [ master ]
+    paths: 
+    - 'TestSite/**'
+
 env:
   folderName: 'TestSite'
 
@@ -24,6 +29,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore $folderName/$csprojName
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ${{ format('{0}/{1}', '$folderName', '$csprojName') }} --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ${{ format('{0}/{1}', '$folderName', '$csprojName') }} --no-restore --verbosity normal
