@@ -7,10 +7,12 @@ on:
     branches: [ master ]
 env:
   folderName: 'TestSite'
+
 jobs:
   build:
     env: 
       csprojName:  'TestSite.csproj'
+      
     runs-on: ubuntu-latest
 
     steps:
